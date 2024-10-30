@@ -21,7 +21,7 @@ import {
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://hospital360-strapi-production.up.railway.app/api/",
+    baseUrl: "https://hospital360-strapi-production.up.railway.app/api",
   }),
   tagTypes: ["appointment", "review"],
   endpoints: (builder) => ({
