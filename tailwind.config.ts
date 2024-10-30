@@ -8,12 +8,19 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        playwrite: ['"Playwrite GB S"', "cursive"], // إضافة Playwrite
+        agdasima: ['"Agdasima"', "sans-serif"], // إضافة Agdasima
+      },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primaryColor: "#03045e",
+        "custom-blue": "#0077b6",
+        "custom-light-blue": "#00b4d8",
+        "custom-sky-blue": "#0F67B1",
+        backgroundPri: "#E9EFEC",
       },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 };
 export default config;

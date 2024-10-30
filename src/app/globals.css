@@ -2,26 +2,113 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@import url("https://fonts.googleapis.com/css2?family=Playwrite+GB+S:wght@100..400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap");
+
+.playwrite-gb-s-uniquifier {
+  font-family: "Playwrite GB S", cursive;
+  font-weight: 100; /* يمكنك تعديل الوزن حسب الحاجة */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.agdasima-regular {
+  font-family: "Agdasima", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.agdasima-bold {
+  font-family: "Agdasima", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* (اختياري) تعيين الخط الافتراضي لعموم الموقع) */
+body {
+  font-family: "Playwrite GB S", cursive; /* يمكنك تغيير هذا إلى "Agdasima" إذا كنت تفضل ذلك */
+}
+/* In your global CSS file or a styles module */
+body {
+  /* padding-top: 4rem;  */
+}
+.cl-footer {
+  display: none;
+}
+.cl-signIn-root {
+  margin-top: -2px;
+  border-radius: 12px;
+  border-top: solid 2px #03045e;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  -ms-border-radius: 12px;
+  -o-border-radius: 12px;
+}
+@media (min-width: 1024px) {
+  .cl-signIn-root {
+    margin-top: 0;
+    border-radius: 0;
+    border: none;
   }
 }
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+html {
+  scroll-behavior: smooth;
+}
+.cl-userButtonPopoverFooter {
+  display: none !important;
+}
+/* .cl-rootBox {
+  width: 75px;
+  height: 75px;
+}
+.cl-rootBox button {
+  width: 75px;
+  height: 75px;
+} */
+.cl-rootBox button span {
+  width: 37px;
+  height: 37px;
+}
+.cl-internal-df7v37 {
+  display: none;
+}
+.splide__track {
+  height: fit-content;
+}
+.splide__pagination {
+  display: none !important;
+}
+/* 
+ */
+:root {
+  --skeleton-bg-color: #e9efec; /* لون الخلفية */
+  --skeleton-animation-color: #0f67b1; /* لون الرسوم المتحركة */
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+.skeleton {
+  border-radius: var(--rounded-box, 0.5rem /* 16px */);
+  --tw-bg-opacity: 1;
+  background-color: var(--skeleton-bg-color);
+  /*استخداملونالخلفية*/
+  will-change: background-position;
+  animation: skeleton 1.8s ease-in-out infinite;
+  background-image: linear-gradient(
+    105deg,
+    transparent 0%,
+    transparent 40%,
+    var(--skeleton-animation-color) 50%,
+    /* استخدام لون الرسوم المتحركة */ transparent 60%,
+    transparent 100%
+  );
+  background-size: 200% auto;
+  background-repeat: no-repeat;
+  background-position-x: -50%;
+  -webkit-border-radius: var(--rounded-box, 0.5rem /* 16px */);
+  -moz-border-radius: var(--rounded-box, 0.5rem /* 16px */);
+  -ms-border-radius: var(--rounded-box, 0.5rem /* 16px */);
+  -o-border-radius: var(--rounded-box, 0.5rem /* 16px */);
+}
+
+@media (prefers-reduced-motion) {
+  .skeleton {
+    animation-duration: 15s;
   }
 }
