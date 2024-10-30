@@ -34,7 +34,7 @@ const TopRatedHospital = () => {
   // Get the top 4 hospitals
   const topHospitals = sortedHospitals?.slice(0, 4);
   return (
-    <section className=" sm:py-4 pb-6 px-4 sm:px-6 mt-[-55px] sm:mt-[-88px] md:mt-8 lg:px-8">
+    <section className=" sm:py-4 pb-6 px-4 sm:px-6 mt-[-25px] sm:mt-[-88px] md:mt-8 lg:px-8">
       <div className="container mx-auto">
         <h1 className="text-2xl font-semibold text-start text-primaryColor font-agdasima capitalize lg:text-3xl">
           Popular hostpitals
