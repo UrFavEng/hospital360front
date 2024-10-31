@@ -38,7 +38,11 @@ export default function RootLayout({
             )}
             <div className=" container mx-auto px-4 "> {children}</div>{" "}
             {!hideNavbarRoutes.includes(pathname) && (
-              <div className=" bg-white w-full h-20">
+              <div
+                className={`${
+                  !hideNavbarRoutes.includes(pathname) ? "px-4" : ""
+                } bg-white w-full h-20`}
+              >
                 <Footer />
               </div>
             )}
