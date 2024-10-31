@@ -26,7 +26,11 @@ export default function RootLayout({
     <ClerkProvider>
       <Provider store={store}>
         <html lang="en">
-          <body className="font-playwrite  antialiased bg-backgroundPri">
+          <body
+            className={`font-playwrite ${
+              !hideNavbarRoutes.includes(pathname) ? "px-4" : ""
+            }   antialiased bg-backgroundPri`}
+          >
             {!hideNavbarRoutes.includes(pathname) && (
               <div className=" bg-white w-full h-20">
                 <Navbar />
