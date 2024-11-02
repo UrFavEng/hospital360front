@@ -26,23 +26,22 @@ export default function RootLayout({
     <ClerkProvider>
       <Provider store={store}>
         <html lang="en">
-          <body
-            className={`font-playwrite ${
-              !hideNavbarRoutes.includes(pathname) ? "px-4" : ""
-            }   antialiased bg-backgroundPri`}
-          >
+          <body className={`font-playwrite   antialiased bg-backgroundPri`}>
             {!hideNavbarRoutes.includes(pathname) && (
               <div className=" bg-white w-full h-20">
                 <Navbar />
               </div>
             )}
-            <div className=" container mx-auto px-4 "> {children}</div>{" "}
+            <div
+              className={` container mx-auto ${
+                !hideNavbarRoutes.includes(pathname) ? "px-4" : ""
+              }  `}
+            >
+              {" "}
+              {children}
+            </div>{" "}
             {!hideNavbarRoutes.includes(pathname) && (
-              <div
-                className={`${
-                  !hideNavbarRoutes.includes(pathname) ? "px-4" : ""
-                } bg-white w-full h-20`}
-              >
+              <div className={` bg-white w-full h-20`}>
                 <Footer />
               </div>
             )}
