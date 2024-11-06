@@ -4,14 +4,23 @@ import { useState } from "react";
 import { RedirectToUserProfile, useClerk, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { Menu } from "lucide-react";
+import { useGetAllServicesQuery } from "@/app/store/apislice";
 
 const Dropdown = () => {
+  const { data } = useGetAllServicesQuery();
+
   const [isOpen, setIsOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
   const { signOut } = useClerk();
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
+
+  const toggleServicesDropdown = () => {
+    setIsServicesOpen(!isServicesOpen);
+  };
+
   const { user } = useUser();
   const [view, setView] = useState(false);
   const handleLogout = async () => {
@@ -27,7 +36,6 @@ const Dropdown = () => {
       >
         {user ? (
           <>
-            {" "}
             <span className="mx-1">{user.fullName}</span>
             <svg
               className="w-5 h-5 mx-1"
@@ -56,10 +64,9 @@ const Dropdown = () => {
         ></div>
       )}
       {isOpen && (
-        <div className="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden origin-top-right bg-white rounded-md shadow-xl dark:bg-gray-800">
+        <div className="absolute right-0 z-20 w-56 py-2 mt-2  origin-top-right bg-white rounded-md shadow-xl dark:bg-gray-800">
           {user && (
             <>
-              {" "}
               <a
                 onClick={() => setView(true)}
                 className="flex cursor-pointer items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
@@ -87,49 +94,61 @@ const Dropdown = () => {
                 className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
               >
                 Appointment
-              </Link>{" "}
-              <hr className="border-gray-200 dark:border-gray-700" />{" "}
+              </Link>
+              <hr className="border-gray-200 dark:border-gray-700" />
             </>
-          )}{" "}
+          )}
           <Link
             href={"/hospitals"}
             className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
           >
             Hospitals
-          </Link>{" "}
-          {/* <Link
-            href={"/clincs"}
-            className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
-          >
-            Clincs
-          </Link>{" "} */}
+          </Link>
+
+          {/* Services Dropdown */}
+          <div className="relative">
+            <p
+              onClick={toggleServicesDropdown}
+              className="block cursor-pointer px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+            >
+              Services
+            </p>
+            {isServicesOpen && (
+              <div className="absolute overflow-hidden right-[100%] top-0 mt-1 w-48 bg-white dark:bg-gray-800 rounded-l-md rounded-b-md shadow-lg">
+                {data?.data.map((link) => (
+                  <Link
+                    key={link.documentId}
+                    href={"/services/" + link.documentId}
+                    className="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
           <Link
             href={"/doctors"}
             className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
           >
             Doctors
-          </Link>{" "}
+          </Link>
           <hr className="border-gray-200 dark:border-gray-700" />
           {user ? (
-            <>
-              {" "}
-              <a
-                onClick={handleLogout}
-                className="block cursor-pointer px-4 py-2 text-[13px] text-red-500 capitalize transition-colors duration-300 transform  hover:bg-gray-100 dark:hover:bg-gray-700 "
-              >
-                Sign out
-              </a>
-            </>
+            <a
+              onClick={handleLogout}
+              className="block cursor-pointer px-4 py-2 text-[13px] text-red-500 capitalize transition-colors duration-300 transform hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              Sign out
+            </a>
           ) : (
-            <>
-              {" "}
-              <Link
-                href="/sign-in"
-                className="block px-4 py-3 text-[14px] hover:text-custom-light-blue capitalize transition-colors duration-300 transform font-bold text-gray-100  hover:bg-gray-700 "
-              >
-                Login
-              </Link>
-            </>
+            <Link
+              href="/sign-in"
+              className="block px-4 py-3 text-[14px] hover:text-custom-light-blue capitalize transition-colors duration-300 transform font-bold text-gray-100 hover:bg-gray-700"
+            >
+              Login
+            </Link>
           )}
         </div>
       )}
